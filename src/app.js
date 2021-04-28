@@ -1,7 +1,7 @@
 import './js/imports';
 
 const getImgUrl = 'https://boiling-refuge-66454.herokuapp.com/images';
-const geImgIdUrl = 'https://boiling-refuge-66454.herokuapp.com/images/:imageId';
+const geImgIdUrl = 'https://boiling-refuge-66454.herokuapp.com/images/';
 const addComment =
 	'https://boiling-refuge-66454.herokuapp.com/images/:imageId/comments';
 const popup = document.querySelector('.popup');
@@ -17,6 +17,42 @@ async function getImg() {
 	await getData(getImgUrl).then((data) => {
 		renderImg(data);
 	});
+}
+
+async function getImgFromId(id) {
+	await getData(`${geImgIdUrl}${id}`).then((data) => {
+	renderComment(data)
+	});
+}
+
+function renderComment(item) {
+	popup.style.display = 'flex';
+	const popupForm = document.querySelector('.popup__form');
+	const popupComment = document.querySelector('.popup__comment');
+	const popupImg = document.createElement('img');
+	popupImg.classList.add('popup__img');
+	popupImg.setAttribute('src', item.url);
+	popupImg.setAttribute('id', item.id);
+	popupForm.insertAdjacentElement('afterbegin',popupImg);
+
+	item.comments.map((com) => {
+		const commentItem = document.createElement('div');
+		const commentTime = document.createElement('span');
+		const commentUser = document.createElement('span');
+
+		commentItem.classList.add('comment__item');
+		commentTime.classList.add('comment__item-time');
+		commentUser.classList.add('comment__item-comment');
+
+		commentItem.setAttribute('id', com.id);
+		commentTime.textContent = showCurrentTime(com.date);
+		commentUser.textContent = com.text;
+
+		commentItem.append(commentTime);
+		commentItem.append(commentUser);
+		popupComment.append(commentItem);
+	});
+
 }
 
 function renderImg(data) {
@@ -35,14 +71,13 @@ function renderImg(data) {
 	return res;
 }
 
-function show() {
-	popup.style.display = 'flex';
+function show(id) {
+	getImgFromId(id);
 }
 
 function hide() {
 	popup.style.display = 'none';
 }
-getImg();
 
 function showCurrentTime(UNIX_timestamp) {
 	let timestamp = new Date(UNIX_timestamp * 1000);
@@ -80,7 +115,6 @@ function showCurrentTime(UNIX_timestamp) {
 	return time;
 }
 
-
 // call events
 
 document.querySelector('.block-img').addEventListener('click', (event) => {
@@ -90,3 +124,4 @@ document.querySelector('.block-img').addEventListener('click', (event) => {
 	show(target.id);
 });
 document.querySelector('.popup__btn--close').addEventListener('click', hide);
+getImg();
