@@ -10,10 +10,12 @@
 	gap: $gap;
 	padding: $padding;
 	height: 100%;
+  font-family: $base-font, 'sans-serif';
 
 	&__title {
-		text-align: center;
-		font-size: $base-font;
+    font-size: $base-font;
+    line-height: 42px;
+    text-transform: uppercase;
 	}
 }
 

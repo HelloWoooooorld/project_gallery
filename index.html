@@ -6,35 +6,30 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
 		<link rel="stylesheet" href="dist/style.css" />
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+		<link
+			rel="stylesheet"
+			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+		/>
 		<title>Document</title>
 	</head>
 	<body>
 		<div class="container">
-			<!--block-1 has 3 children, box-1,box-2,box-3 -->
 			<h1 class="container__title">Image App</h1>
-			<div class="block-img">
-			</div>
-			<!--similar to block-1, values are changed -->
+			<div class="block-img"></div>
 		</div>
 		<div class="wrapper">
 			<div class="popup">
 				<div class="popup__form">
-					<form action="#">
-						<input type="text" placeholder="Ваше имя" />
-						<input
-							type="text"
-							min="0"
-							max="100"
-							placeholder="Ваш комментарий"
-						/>
-						<button class="form__btn">Оставить Комментарий</button>
+					<form action="#" onsubmit="return false">
+						<input id='name' type="text" name='name' min="0" max="100" placeholder="Ваше имя" />
+						<input id='comment' type="text" name='comment' min="0" max="100" placeholder="Ваш комментарий"/>
+						<button type='button' class="form__btn">Оставить Комментарий</button>
 					</form>
 				</div>
-				<div class="popup__comment">
-					
-				</div>
-				<button class="popup__btn--close"><i class="fa fa-times icon"></i></button>
+				<div class="popup__comment"></div>
+				<button class="popup__btn--close">
+					<i class="fa fa-times icon"></i>
+				</button>
 			</div>
 		</div>
 		<script type="text/javascript" src="dist/bundle.js"></script>
