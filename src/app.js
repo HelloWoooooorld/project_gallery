@@ -42,15 +42,51 @@ function show() {
 function hide() {
 	popup.style.display = 'none';
 }
-
 getImg();
 
+function showCurrentTime(UNIX_timestamp) {
+	let timestamp = new Date(UNIX_timestamp * 1000);
+	let months = [
+		'Jan',
+		'Feb',
+		'Mar',
+		'Apr',
+		'May',
+		'Jun',
+		'Jul',
+		'Aug',
+		'Sep',
+		'Oct',
+		'Nov',
+		'Dec',
+	];
+	let dayName = [
+		'Monday',
+		'Thusday',
+		'Wednesday',
+		'Thursday',
+		'Friday',
+		'Saturday',
+		'Sunday',
+	];
+	let year = timestamp.getFullYear();
+	let month = months[timestamp.getMonth()];
+	let date = timestamp.getDate();
+	let day = dayName[timestamp.getDay()];
+	let hour = timestamp.getHours();
+	let min = timestamp.getMinutes();
+	let time = `${hour}:${min}, ${day}, ${date} ${month} ${year}`;
 
+	return time;
+}
+
+
+// call events
 
 document.querySelector('.block-img').addEventListener('click', (event) => {
-  let target = event.target; // где был клик?
+	let target = event.target; // где был клик?
 
 	if (target.tagName != 'IMG') return;
-	show();
-})
+	show(target.id);
+});
 document.querySelector('.popup__btn--close').addEventListener('click', hide);
