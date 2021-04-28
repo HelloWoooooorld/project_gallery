@@ -5,7 +5,6 @@ const geImgIdUrl = 'https://boiling-refuge-66454.herokuapp.com/images/:imageId';
 const addComment =
 	'https://boiling-refuge-66454.herokuapp.com/images/:imageId/comments';
 const popup = document.querySelector('.popup');
-const blockImg = document.querySelector('.block-img');
 
 async function getData(url) {
 	const response = await fetch(url);
@@ -46,11 +45,12 @@ function hide() {
 
 getImg();
 
-blockImg.onclick = function (event) {
-	let target = event.target; // где был клик?
+
+
+document.querySelector('.block-img').addEventListener('click', (event) => {
+  let target = event.target; // где был клик?
 
 	if (target.tagName != 'IMG') return;
-	show(); // не на TD? тогда не интересует
-};
-
+	show();
+})
 document.querySelector('.popup__btn--close').addEventListener('click', hide);
