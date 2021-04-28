@@ -1,0 +1,40 @@
+@import './scss/base';
+@import './scss/mixins';
+@import './scss/typography';
+@import './scss/vars';
+
+.container{
+    display: flex;
+    flex-direction: column;
+    gap: $gap;
+    padding: $padding;
+    height: 100%;
+
+    &__title {
+        text-align: center;
+        font-size: $base-font;
+    }
+  }
+
+  [class ^="block-"]{
+      display: flex;
+      flex-direction: row;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: $gap;
+
+      @include query (tablet){
+        flex-direction: column;
+        height: 100%;
+      }
+    }
+
+    [class ^="box-"]{
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          flex-basis: (100%)/4; // 33.33% each
+          border : 2px solid black;
+          border-radius: 10px;
+          background-color: #c1c1c1;
+        }
