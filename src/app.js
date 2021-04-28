@@ -30,6 +30,7 @@ function renderComment(item) {
 	const popupForm = document.querySelector('.popup__form');
 	const popupComment = document.querySelector('.popup__comment');
 	const popupImg = document.createElement('img');
+
 	popupImg.classList.add('popup__img');
 	popupImg.setAttribute('src', item.url);
 	popupImg.setAttribute('id', item.id);
@@ -55,6 +56,11 @@ function renderComment(item) {
 
 }
 
+function clear() {
+  document.querySelector('.popup__img').remove(); 
+  document.querySelector('.comment__item').remove();
+}
+
 function renderImg(data) {
 	const container = document.querySelector('.block-img');
 	const res = data.map((item) => {
@@ -77,6 +83,7 @@ function show(id) {
 
 function hide() {
 	popup.style.display = 'none';
+  clear();
 }
 
 function showCurrentTime(UNIX_timestamp) {
