@@ -4,6 +4,8 @@ const Gallery = (function () {
   const getImgUrl = 'https://boiling-refuge-66454.herokuapp.com/images';
 
   const popup = document.querySelector('.popup');
+  const name = document.getElementById('name').value;
+  const comment = document.getElementById('comment').value;
 
   return {
     getData: async function (url) {
@@ -33,12 +35,12 @@ const Gallery = (function () {
         },
         body: JSON.stringify(data)
       });
+      this.hide();
     },
 
     getComment: function () {
       const imgId = document.querySelector('.popup__img').id;
-      const name = document.getElementById('name').value;
-      const comment = document.getElementById('comment').value;
+
 
       let data = {
         imgId,
@@ -125,11 +127,6 @@ const Gallery = (function () {
 
 Gallery.init();
 
-document.querySelector('.block-img').addEventListener('click', (event) => {
-  let target = event.target; // где был клик?
-  if (target.tagName != 'IMG') return;
-  Gallery.show(target.id);
-});
 
 document
   .querySelector('.popup__btn--close')
