@@ -89,24 +89,22 @@ const Gallery = (function () {
       commentItem.classList.add('comment__item');
       commentTime.classList.add('comment__item-time');
       commentUser.classList.add('comment__item-comment');
-      if(item.comments.length) {
-        item.comments.map((com, i) => {
+
+      if (item.comments.length) {
+        item.comments.map((com) => {
           commentItem.setAttribute('id', com.id);
           commentTime.textContent = this.showCurrentTime(com.date);
           commentUser.textContent = com.text;
-  
-          commentItem.append(commentTime);
-          commentItem.append(commentUser);
-          popupComment.append(commentItem);
         });
-      }else {
+      } else {
         commentTime.textContent = `Alert message`;
         commentUser.textContent = `No comment yet`;
-        commentItem.append(commentTime);
-        commentItem.append(commentUser);
-        popupComment.append(commentItem);
       }
-     
+
+      commentItem.append(commentTime);
+      commentItem.append(commentUser);
+      popupComment.append(commentItem);
+
     },
 
     renderImg: function (data) {

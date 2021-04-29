@@ -64,7 +64,6 @@
 }
 
 .popup {
-	// ПОМЕНЯЙ НА NONE
 	display: none;
 	flex-wrap: wrap;
 	width: 620px;
@@ -113,8 +112,6 @@
 		}
 	}
 
-
-
 	&__btn--close {
 		width: 50px;
 		height: 50px;
@@ -127,6 +124,7 @@
 		right: 21px;
 		top: 21px;
 	}
+	
 	@include query(tablet) {
 		justify-content: space-between;
 		flex-direction: column;
