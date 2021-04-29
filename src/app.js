@@ -4,8 +4,7 @@ const Gallery = (function () {
   const getImgUrl = 'https://boiling-refuge-66454.herokuapp.com/images';
 
   const popup = document.querySelector('.popup');
-  const name = document.getElementById('name').value;
-  const comment = document.getElementById('comment').value;
+
 
   return {
     getData: async function (url) {
@@ -35,21 +34,28 @@ const Gallery = (function () {
         },
         body: JSON.stringify(data)
       });
+      console.log(response)
       this.hide();
     },
 
     getComment: function () {
       const imgId = document.querySelector('.popup__img').id;
+      const name = document.getElementById('name').value;
+      const comment = document.getElementById('comment').value;
 
-
-      let data = {
-        imgId,
-        name,
-        comment,
-        date: parseInt((new Date().getTime() / 1000).toFixed(0)),
-      };
-
-      this.submitComment(data);
+      if(name && comment) {
+        let data = {
+          imgId,
+          name,
+          comment,
+          date: parseInt((new Date().getTime() / 1000).toFixed(0)),
+        };
+        this.submitComment(data);
+        this.removeErr();
+        this.success();
+      }else {
+        this.showErr();
+      }
     },
 
 
@@ -122,6 +128,24 @@ const Gallery = (function () {
       const time = `${date}.${month}.${year}`;
       return time;
     },
+
+    showErr: function () {
+      document.getElementById('name').style.border = '1px solid red';
+      document.getElementById('comment').style.border = '1px solid red';
+      document.querySelector('.form__btn').style.background = 'red'
+    },
+
+    removeErr: function () {
+      document.getElementById('name').style.border = 'none';
+      document.getElementById('comment').style.border = 'none';
+      document.querySelector('.form__btn').style.background = '#4997d0'
+    },
+
+    success: function () {
+      document.getElementById('name').style.border = '1px solid #49d060';
+      document.getElementById('comment').style.border = '1px solid #49d060';
+      document.querySelector('.form__btn').style.background = '#49d060'
+    }
   };
 })();
 
@@ -132,7 +156,6 @@ document.querySelector('.block-img').addEventListener('click', (event) => {
 	if (target.tagName != 'IMG') return;
 	Gallery.show(target.id);
 });
-
 
 document
   .querySelector('.popup__btn--close')
