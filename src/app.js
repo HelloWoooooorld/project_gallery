@@ -76,32 +76,39 @@ const Gallery = (function () {
     renderComment: function (item) {
       popup.style.display = 'flex';
 
-      const popupForm = document.querySelector('.popup__form');
       const popupComment = document.querySelector('.popup__comment');
       const popupImg = document.createElement('img');
+      const commentItem = document.createElement('div');
+      const commentTime = document.createElement('span');
+      const commentUser = document.createElement('span');
 
       popupImg.classList.add('popup__img');
       popupImg.setAttribute('src', item.url);
       popupImg.setAttribute('id', item.id);
       popup.insertAdjacentElement('afterbegin', popupImg);
 
-      item.comments.map((com) => {
-        const commentItem = document.createElement('div');
-        const commentTime = document.createElement('span');
-        const commentUser = document.createElement('span');
-
-        commentItem.classList.add('comment__item');
-        commentTime.classList.add('comment__item-time');
-        commentUser.classList.add('comment__item-comment');
-
-        commentItem.setAttribute('id', com.id);
-        commentTime.textContent = this.showCurrentTime(com.date);
-        commentUser.textContent = com.text;
-
+      commentItem.classList.add('comment__item');
+      commentTime.classList.add('comment__item-time');
+      commentUser.classList.add('comment__item-comment');
+      if(item.comments.length) {
+        item.comments.map((com, i) => {
+          commentItem.setAttribute('id', com.id);
+          commentTime.textContent = this.showCurrentTime(com.date);
+          commentUser.textContent = com.text;
+  
+          commentItem.append(commentTime);
+          commentItem.append(commentUser);
+          popupComment.append(commentItem);
+  
+        });
+      }else {
+        commentTime.textContent = `Alert message`;
+        commentUser.textContent = `No comment yet`;
         commentItem.append(commentTime);
         commentItem.append(commentUser);
         popupComment.append(commentItem);
-      });
+      }
+     
     },
 
     renderImg: function (data) {
