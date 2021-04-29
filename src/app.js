@@ -127,6 +127,12 @@ const Gallery = (function () {
 
 Gallery.init();
 
+document.querySelector('.block-img').addEventListener('click', (event) => {
+	let target = event.target; // где был клик?
+	if (target.tagName != 'IMG') return;
+	Gallery.show(target.id);
+});
+
 
 document
   .querySelector('.popup__btn--close')
