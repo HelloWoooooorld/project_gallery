@@ -1,4 +1,4 @@
-import {renderImg} from './render';
+import { renderImg } from './render';
 
 export const getData = async (url) => {
     const response = await fetch(url);

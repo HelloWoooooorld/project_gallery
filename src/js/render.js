@@ -34,7 +34,6 @@ export const renderComment = (item, fn) => {
     popupComment.append(commentItem);
 }
 
-
 export const renderImg = (data) => {
     const container = document.querySelector('.block-img');
     const res = data.map((item) => {
@@ -50,7 +49,6 @@ export const renderImg = (data) => {
     });
     return res;
 }
-
 
 export const showErr = () => {
     document.getElementById('name').style.border = '1px solid red';

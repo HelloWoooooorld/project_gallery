@@ -9,7 +9,6 @@ const Gallery = (function () {
   const comment = document.getElementById('comment');
 
   return {
-
     init: function () {
       getImg(getImgUrl);
     },
@@ -22,7 +21,6 @@ const Gallery = (function () {
 
     getComment: function () {
       const imgId = document.querySelector('.popup__img').id;
-
 
       if (name && comment) {
         let data = {
@@ -39,7 +37,6 @@ const Gallery = (function () {
       } else {
         showErr();
       }
-
     },
 
     submitComment: async function (data) {
