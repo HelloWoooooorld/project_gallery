@@ -30,10 +30,8 @@
 
 	@include query(tablet) {
 		flex-direction: column;
-		img {
-			width: 200px;
-			height: 200px;
-		}
+		align-items: center;
+		justify-content: center;
 	}
 }
 
@@ -52,13 +50,25 @@
 	top: 50%;
 	left: 50%;
 	transform: translate(-50%, -50%);
+	z-index: 10;
+}
+
+.popup-fade:before {
+	content: '';
+	background: #000;
+	position: fixed; 
+	left: 0;
+	top: 0;
+	width: 100%; 
+	height: 100%;
+	opacity: 0.7;
+	z-index: 1;
 }
 
 .popup {
 	// ПОМЕНЯЙ НА NONE
 	display: none;
-	justify-content: space-between;
-	flex-direction: row;
+	flex-wrap: wrap;
 	width: 620px;
 	height: 425px;
 	background-color: #fff;
@@ -83,6 +93,7 @@
 			background: #ffffff;
 			border: 1px solid #cccccc;
 			box-sizing: border-box;
+			width: 332px;
 			height: 30px;
 			border-radius: 3px;
 			margin-bottom: 20px;
@@ -96,6 +107,7 @@
 			border-radius: 3px;
 			cursor: pointer;
 			transition: all 0.2s;
+			max-width: 332px;
 		}
 
 		.form__btn:hover {
@@ -106,8 +118,8 @@
 	&__comment {
 		display: flex;
 		flex-direction: column;
+		align-items: start;
 		padding: 5px;
-		flex-basis: 25%;
 		.comment__item {
 			display: flex;
 			flex-direction: column;
@@ -116,8 +128,6 @@
 		}
 
 		.comment__item-time {
-			font-size: 13px;
-			line-height: 15px;
 			color: #999999;
 		}
 	}
@@ -130,7 +140,77 @@
 		font-size: 30px;
 		cursor: pointer;
 		align-items: start;
+		position: absolute;
+		right: 21px;
+		top: 21px;
 	}
 	@include query(tablet) {
+		justify-content: space-between;
+		flex-direction: column;
+		text-align: left;
+		width: 331px;
+		height: auto;
+		border: 1px solid black;
+		padding: 0;
+
+		&__form {
+			display: flex;
+			flex-direction: column;
+			justify-content: center;
+			align-items: center;
+			order: 1;
+
+			img {
+				width: 320px;
+				height: 205px;
+				border: 1px solid black;
+				border: none;
+			}
+
+			form > input {
+				width: 276px;
+				height: 30px;
+			}
+		}
+		.popup__img {
+			width: 320px;
+			height: 205px;
+			object-fit: cover;
+			margin-bottom: 0;
+		}
+
+		&__btn--close {
+			order: -1;
+			position: absolute;
+			right: 0;
+		}
+	}
+
+	&__img {
+		width: 331px;
+		height: 205px;
+		object-fit: cover;
+		margin-bottom: 30px;
+	}
+
+	&__comment {
+		display: flex;
+		flex-direction: column;
+		margin: 25px;
+		height: auto;
+		.comment__item {
+			display: flex;
+			flex-direction: column;
+			font-size: 13px;
+			line-height: 15px;
+		}
+
+		.comment__item-time {
+			color: #999999;
+			margin-bottom: 5px;
+		}
+	}
+	.form__btn {
+		margin-bottom: 55px;
 	}
 }

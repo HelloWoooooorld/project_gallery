@@ -5,7 +5,6 @@ const Gallery = (function () {
 
   const popup = document.querySelector('.popup');
 
-
   return {
     getData: async function (url) {
       const response = await fetch(url);
@@ -43,7 +42,7 @@ const Gallery = (function () {
       const name = document.getElementById('name').value;
       const comment = document.getElementById('comment').value;
 
-      if(name && comment) {
+      if (name && comment) {
         let data = {
           imgId,
           name,
@@ -53,11 +52,10 @@ const Gallery = (function () {
         this.submitComment(data);
         this.removeErr();
         this.success();
-      }else {
+      } else {
         this.showErr();
       }
     },
-
 
     init: function () {
       this.getImg();
@@ -65,10 +63,12 @@ const Gallery = (function () {
 
     show: function (id) {
       this.getImgFromId(id);
+      document.querySelector('.container').classList.add('popup-fade')
     },
 
     hide: function () {
       popup.style.display = 'none';
+      document.querySelector('.container').classList.remove('popup-fade')
       document.querySelector('.popup__img').remove();
       document.querySelector('.comment__item').remove();
     },
@@ -83,7 +83,7 @@ const Gallery = (function () {
       popupImg.classList.add('popup__img');
       popupImg.setAttribute('src', item.url);
       popupImg.setAttribute('id', item.id);
-      popupForm.insertAdjacentElement('afterbegin', popupImg);
+      popup.insertAdjacentElement('afterbegin', popupImg);
 
       item.comments.map((com) => {
         const commentItem = document.createElement('div');
@@ -151,11 +151,13 @@ const Gallery = (function () {
 
 Gallery.init();
 
-document.querySelector('.block-img').addEventListener('click', (event) => {
-	let target = event.target; // где был клик?
-	if (target.tagName != 'IMG') return;
-	Gallery.show(target.id);
-});
+document
+  .querySelector('.block-img')
+  .addEventListener('click', (event) => {
+    let target = event.target; // где был клик?
+    if (target.tagName != 'IMG') return;
+    Gallery.show(target.id);
+  });
 
 document
   .querySelector('.popup__btn--close')
