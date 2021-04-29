@@ -1,4 +1,6 @@
 import './js/imports';
+import {renderComment, renderImg, showErr, removeErr, success} from './js/render'
+
 
 const Gallery = (function () {
   const getImgUrl = 'https://boiling-refuge-66454.herokuapp.com/images';
@@ -14,16 +16,16 @@ const Gallery = (function () {
 
     getImgFromId: async function (id) {
       await this.getData(`${getImgUrl}/${id}`).then((data) => {
-        this.renderComment(data);
+        renderComment(data, this.showCurrentTime);
       });
     },
 
     getImg: async function () {
       await this.getData(getImgUrl).then((data) => {
-        this.renderImg(data);
+        renderImg(data);
       });
     },
-    // *****************
+
     submitComment: async function (data) {
       let response = await fetch(`${getImgUrl}/${data.imgId}/comments`, {
         method: 'POST',
@@ -49,10 +51,10 @@ const Gallery = (function () {
           date: parseInt((new Date().getTime() / 1000).toFixed(0)),
         };
         this.submitComment(data);
-        this.removeErr();
-        this.success();
+        removeErr();
+        success();
       } else {
-        this.showErr();
+        showErr();
       }
     },
 
@@ -72,57 +74,6 @@ const Gallery = (function () {
       document.querySelector('.comment__item').remove();
     },
 
-    renderComment: function (item) {
-      popup.style.display = 'flex';
-
-      const popupComment = document.querySelector('.popup__comment');
-      const popupImg = document.createElement('img');
-      const commentItem = document.createElement('div');
-      const commentTime = document.createElement('span');
-      const commentUser = document.createElement('span');
-
-      popupImg.classList.add('popup__img');
-      popupImg.setAttribute('src', item.url);
-      popupImg.setAttribute('id', item.id);
-      popup.insertAdjacentElement('afterbegin', popupImg);
-
-      commentItem.classList.add('comment__item');
-      commentTime.classList.add('comment__item-time');
-      commentUser.classList.add('comment__item-comment');
-
-      if (item.comments.length) {
-        item.comments.map((com) => {
-          commentItem.setAttribute('id', com.id);
-          commentTime.textContent = this.showCurrentTime(com.date);
-          commentUser.textContent = com.text;
-        });
-      } else {
-        commentTime.textContent = `Alert message`;
-        commentUser.textContent = `No comment yet`;
-      }
-
-      commentItem.append(commentTime);
-      commentItem.append(commentUser);
-      popupComment.append(commentItem);
-
-    },
-
-    renderImg: function (data) {
-      const container = document.querySelector('.block-img');
-      const res = data.map((item) => {
-        const img = document.createElement('img');
-        const box = document.createElement('div');
-
-        box.classList.add('box-item');
-        img.setAttribute('src', item.url);
-        img.setAttribute('id', item.id);
-
-        box.append(img);
-        container.append(box);
-      });
-      return res;
-    },
-
     showCurrentTime: function (UNIX_timestamp) {
       const a = new Date(UNIX_timestamp);
       const year = a.getFullYear();
@@ -131,24 +82,6 @@ const Gallery = (function () {
       const time = `${date}.${month}.${year}`;
       return time;
     },
-
-    showErr: function () {
-      document.getElementById('name').style.border = '1px solid red';
-      document.getElementById('comment').style.border = '1px solid red';
-      document.querySelector('.form__btn').style.background = 'red'
-    },
-
-    removeErr: function () {
-      document.getElementById('name').style.border = 'none';
-      document.getElementById('comment').style.border = 'none';
-      document.querySelector('.form__btn').style.background = '#4997d0'
-    },
-
-    success: function () {
-      document.getElementById('name').style.border = '1px solid #49d060';
-      document.getElementById('comment').style.border = '1px solid #49d060';
-      document.querySelector('.form__btn').style.background = '#49d060'
-    }
   };
 })();
 
@@ -157,7 +90,7 @@ Gallery.init();
 document
   .querySelector('.block-img')
   .addEventListener('click', (event) => {
-    let target = event.target; // где был клик?
+    let target = event.target; 
     if (target.tagName != 'IMG') return;
     Gallery.show(target.id);
   });
