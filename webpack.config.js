@@ -11,7 +11,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
   },
-  mode: 'production',
+  mode: 'development',
   module: {
     rules: [
       {
@@ -26,7 +26,7 @@ module.exports = {
   },
   plugins: [
     new HtmlWebpackPlugin({
-      template: './dist/index.html',
+      template: 'index.html',
       inject: 'body',
     }),
     new ESLintPlugin({
