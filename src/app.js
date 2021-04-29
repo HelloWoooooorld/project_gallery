@@ -1,41 +1,21 @@
 import './js/imports';
-import {renderComment, renderImg, showErr, removeErr, success} from './js/render'
-
+import { renderComment, showErr, removeErr, success } from './js/render';
+import { getData, getImg } from './js/imageServe';
 
 const Gallery = (function () {
   const getImgUrl = 'https://boiling-refuge-66454.herokuapp.com/images';
-
   const popup = document.querySelector('.popup');
 
   return {
-    getData: async function (url) {
-      const response = await fetch(url);
-      const data = await response.json();
-      return data;
+
+    init: function () {
+      getImg(getImgUrl);
     },
 
     getImgFromId: async function (id) {
-      await this.getData(`${getImgUrl}/${id}`).then((data) => {
+      await getData(`${getImgUrl}/${id}`).then((data) => {
         renderComment(data, this.showCurrentTime);
       });
-    },
-
-    getImg: async function () {
-      await this.getData(getImgUrl).then((data) => {
-        renderImg(data);
-      });
-    },
-
-    submitComment: async function (data) {
-      let response = await fetch(`${getImgUrl}/${data.imgId}/comments`, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json;charset=utf-8'
-        },
-        body: JSON.stringify(data)
-      });
-      console.log(response)
-      this.hide();
     },
 
     getComment: function () {
@@ -53,13 +33,22 @@ const Gallery = (function () {
         this.submitComment(data);
         removeErr();
         success();
+
       } else {
         showErr();
       }
     },
 
-    init: function () {
-      this.getImg();
+    submitComment: async function (data) {
+      let response = await fetch(`${getImgUrl}/${data.imgId}/comments`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json;charset=utf-8'
+        },
+        body: JSON.stringify(data)
+      });
+      console.log(response)
+      this.hide();
     },
 
     show: function (id) {
@@ -87,21 +76,15 @@ const Gallery = (function () {
 
 Gallery.init();
 
-document
-  .querySelector('.block-img')
-  .addEventListener('click', (event) => {
-    let target = event.target; 
-    if (target.tagName != 'IMG') return;
-    Gallery.show(target.id);
-  });
+document.querySelector('.block-img').addEventListener('click', (event) => {
+  let target = event.target;
+  if (target.tagName != 'IMG') return;
+  Gallery.show(target.id);
+});
 
-document
-  .querySelector('.popup__btn--close')
-  .addEventListener('click', Gallery.hide);
+document.querySelector('.popup__btn--close').addEventListener('click', Gallery.hide);
 
-document
-  .querySelector('.form__btn')
-  .addEventListener('click', (e) => {
-    e.preventDefault();
-    Gallery.getComment();
-  });
+document.querySelector('.form__btn').addEventListener('click', (e) => {
+  e.preventDefault();
+  Gallery.getComment();
+});
