@@ -15,7 +15,6 @@ const Gallery = (function () {
     getImgFromId: async function (id) {
       await this.getData(`${getImgUrl}/${id}`).then((data) => {
         this.renderComment(data);
-        console.log(data);
       });
     },
 
@@ -99,7 +98,6 @@ const Gallery = (function () {
           commentItem.append(commentTime);
           commentItem.append(commentUser);
           popupComment.append(commentItem);
-  
         });
       }else {
         commentTime.textContent = `Alert message`;
