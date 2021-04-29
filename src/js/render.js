@@ -59,8 +59,8 @@ export const showErr = () => {
 }
 
 export const removeErr = () => {
-    document.getElementById('name').style.border = 'none';
-    document.getElementById('comment').style.border = 'none';
+    document.getElementById('name').style.border = '1px solid #cccccc';
+    document.getElementById('comment').style.border = '1px solid #cccccc';
     document.querySelector('.form__btn').style.background = '#4997d0';
 }
 

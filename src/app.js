@@ -5,6 +5,8 @@ import { getData, getImg } from './js/imageServe';
 const Gallery = (function () {
   const getImgUrl = 'https://boiling-refuge-66454.herokuapp.com/images';
   const popup = document.querySelector('.popup');
+  const name = document.getElementById('name');
+  const comment = document.getElementById('comment');
 
   return {
 
@@ -20,23 +22,24 @@ const Gallery = (function () {
 
     getComment: function () {
       const imgId = document.querySelector('.popup__img').id;
-      const name = document.getElementById('name').value;
-      const comment = document.getElementById('comment').value;
+
 
       if (name && comment) {
         let data = {
           imgId,
-          name,
-          comment,
+          name: name.value,
+          comment: comment.value,
           date: parseInt((new Date().getTime() / 1000).toFixed(0)),
         };
         this.submitComment(data);
         removeErr();
         success();
-
+        name.value = ""
+        comment.value = ""
       } else {
         showErr();
       }
+
     },
 
     submitComment: async function (data) {
@@ -48,6 +51,7 @@ const Gallery = (function () {
         body: JSON.stringify(data)
       });
       console.log(response)
+      removeErr();
       this.hide();
     },
 
