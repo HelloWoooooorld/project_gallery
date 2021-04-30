@@ -4,12 +4,7 @@
 		<meta charset="UTF-8" />
 		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-
 		<link rel="stylesheet" href="dist/style.css" />
-		<link
-			rel="stylesheet"
-			href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
-		/>
 		<title>Document</title>
 	</head>
 	<body>
@@ -21,14 +16,51 @@
 			<div class="popup">
 				<div class="popup__form">
 					<form action="#" onsubmit="return false">
-						<input id='name' type="text" name='name' min="0" max="100" placeholder="Ваше имя" />
-						<input id='comment' type="text" name='comment' min="0" max="100" placeholder="Ваш комментарий"/>
-						<button type='button' class="form__btn">Оставить Комментарий</button>
+						<input
+							id="name"
+							type="text"
+							name="name"
+							min="0"
+							max="100"
+							placeholder="Ваше имя"
+						/>
+						<input
+							id="comment"
+							type="text"
+							name="comment"
+							min="0"
+							max="100"
+							placeholder="Ваш комментарий"
+						/>
+						<button type="button" class="form__btn">
+							Оставить Комментарий
+						</button>
 					</form>
 				</div>
 				<div class="popup__comment"></div>
 				<button class="popup__btn--close">
-					<i class="fa fa-times icon"></i>
+					<svg
+						width="20"
+						height="19"
+						viewBox="0 0 20 19"
+						fill="none"
+						xmlns="http://www.w3.org/2000/svg"
+					>
+						<line
+							x1="1.35355"
+							y1="0.646447"
+							x2="19.3536"
+							y2="18.6464"
+							stroke="black"
+						/>
+						<line
+							x1="0.646447"
+							y1="18.6464"
+							x2="18.6464"
+							y2="0.646446"
+							stroke="black"
+						/>
+					</svg>
 				</button>
 			</div>
 		</div>
