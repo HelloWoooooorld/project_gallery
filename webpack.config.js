@@ -11,7 +11,7 @@ module.exports = {
   resolve: {
     extensions: ['.js'],
   },
-  mode: 'development',
+  mode: 'production',
   module: {
     rules: [
       {
