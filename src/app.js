@@ -22,7 +22,7 @@ const Gallery = (function () {
     getComment: function () {
       const imgId = document.querySelector('.popup__img').id;
 
-      if (name && comment) {
+      if (comment.value && name.value) {
         let data = {
           imgId,
           name: name.value,
