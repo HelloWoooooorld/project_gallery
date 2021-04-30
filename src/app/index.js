@@ -1,4 +1,4 @@
-import './js/imports';
+import '../styles/index.scss';
 import { renderComment, showErr, removeErr, success } from './js/render';
 import { getData, getImg } from './js/imageServe';
 
